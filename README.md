@@ -10,6 +10,10 @@
 Python 3.7.4
 ```
 
+## 참고
+[Getting Started with Python in VS Code](https://code.visualstudio.com/docs/python/python-tutorial)
+
+
 ## VS Code에서 파이썬 개발환경 설정
 
 1. vs cdoe 설치 및 실행
@@ -60,4 +64,17 @@ Hello World
     
     >"args": [] 파이선 프로그램을 위한 커맨드라인 아규먼트 지정할 경우
 
-1. `F5`로 디버거 실행. `msg` 변수의 현재 값 확인 가능.
+    [더 많은 디버깅 환경설정 보기](https://code.visualstudio.com/docs/python/debugging#_additional-configurations)
+
+1. `F5`로 디버거 실행  
+    왼쪽 사이드바 또는 코드 위에 마우스오버하여 `msg` 변수의 현재 값 확인 가능. 
+1. **디버그 콘솔**로 변수 작업 가능
+    ```
+    msg
+    'Hello World'
+    msg.capitalize()
+    'Hello world'
+    msg.split()
+    ['Hello', 'World']
+    ```
+1. **[Logpoints](https://code.visualstudio.com/docs/editor/debugging#_logpoints)** 사용하여 중단점 적중시 로그메시지 콘솔에 띄우기 가능
