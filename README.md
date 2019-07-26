@@ -1,4 +1,4 @@
-# Hello Python
+ Hello Python
 
 헬로 파이썬
 
@@ -33,4 +33,31 @@ print(msg)
 Hello World
 ```
 
-(계속)
+## 환경 설정 및 디버거 실행
+
+1. 왼쪽 사이드바의 디버그 뷰 선택
+1. 셋팅 아이콘 클릭 또는 **Debug > Open configurations** 메뉴 사용
+1. `"stopOnEntry": true` 설정 추가
+
+    launch.json :
+    ```json
+    {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "Python: Current File",
+                "type": "python",
+                "request": "launch",
+                "program": "${file}",
+                "console": "integratedTerminal",
+                "stopOnEntry": true, // 프로그램이 시작할 때 첫 줄에서 자동 멈춤 위함
+            }
+        ]
+    }
+    ```
+
+    >"pythonPath": "${workspaceFolder}", // 디버깅에 사용할 인터프리터를 가진 특정 폴더 지정할 경우 
+    
+    >"args": [], // 파이선 프로그램을 위한 커맨드라인 아규먼트 지정할 경우
+
+1. `F5`로 디버거 실행하여 `msg` 변수의 현재 값 나타내보자
