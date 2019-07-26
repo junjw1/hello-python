@@ -37,7 +37,7 @@ Hello World
 
 1. 왼쪽 사이드바의 디버그 뷰 선택
 1. 셋팅 아이콘 클릭 또는 **Debug > Open configurations** 메뉴 사용
-1. `"stopOnEntry": true` 설정 추가
+1. `"stopOnEntry": true` 설정 추가하여 프로그램이 시작할 때 첫 줄에서 멈춤 설정
 
     launch.json :
     ```json
@@ -50,14 +50,14 @@ Hello World
                 "request": "launch",
                 "program": "${file}",
                 "console": "integratedTerminal",
-                "stopOnEntry": true, // 프로그램이 시작할 때 첫 줄에서 자동 멈춤 위함
+                "stopOnEntry": true,
             }
         ]
     }
     ```
 
-    >"pythonPath": "${workspaceFolder}", // 디버깅에 사용할 인터프리터를 가진 특정 폴더 지정할 경우 
+    >"pythonPath": "${workspaceFolder}" 디버깅에 사용할 인터프리터를 가진 특정 폴더 지정할 경우 
     
-    >"args": [], // 파이선 프로그램을 위한 커맨드라인 아규먼트 지정할 경우
+    >"args": [] 파이선 프로그램을 위한 커맨드라인 아규먼트 지정할 경우
 
 1. `F5`로 디버거 실행. `msg` 변수의 현재 값 확인 가능.
