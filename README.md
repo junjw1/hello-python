@@ -11,21 +11,22 @@
 ## 목표
 1. 파이썬 설치, 개발환경 설정, 실행, 디버깅 하기
 1. 패키지를 설치하고 사용 하기
+1. Django 튜토리얼
 
 ## 파이썬 설치
 
-1. https://www.python.org/ 윈도우 설치 // Paht 환경변수에 경로 추가 체크
+1. https://www.python.org/ 윈도우 설치 *//Path 환경변수에 경로 추가 체크*
 1. cmd에서 `python --version` 명령어로 버전 확인
-```
-Python 3.7.4
-```
+    ```
+    Python 3.7.4
+    ```
 
 ## VS Code에서 파이썬 개발환경 설정
 
-1. vs cdoe 설치 및 실행
+1. vs code 설치 및 실행
 1. vs code의 확장 프로그램 **Python extension for Visual Studio Code** 설치
 1. 파이썬 인터프리터 **Python: Select Interpreter** 설정
-    - ``ctrl + shift + P`` 또는 왼쪽 아래 스테이터스 바 클릭
+    - `ctrl+shift+P` 또는 왼쪽 아래 스테이터스 바 클릭
 
 ## Hello World 실행
 
@@ -111,12 +112,42 @@ Python 3.7.4
     ```
     유효하지 않은 패키지라는 메시지를 확인할 수 있다.
 
-1. 가상 환병 생성 및 활성화
+1. 가상 환경 생성 및 활성화
     ```
     py -3 -m -venv .venv
-    .venv\scripts\activate
     ```
 
 1. `matplotlib` 패키지 설치
+    ```
+    python -m pip install matplotlib
+    ```
+
+1. 명령어 `python standardploy.py`로 프로그램 실행. 그래프가 그려진 윈도우 창이 뜬다.
+
+1. 가상 환경 비활성화 하기위해 `deactivate` 터미널에 타이핑
+
+## Django 튜토리얼
+
+Django는 빠르고 안전하고 확장성있는 웹개발을 위한 파이썬 프레임워크. 풍부한 라이브러리 포함.
+
+기본 형태의 페이지 3개를 가진 간단한 Django 앱을 만들어보자.
+
+1. `hello_django` 폴더 생성
+
+1. 다음 명령어로 `env`라는 이름의 가상 환경 생성
+    ```
+    python -m venv env
+    ```
+1. `Ctrl+Shift+P`로 **Python: Select Interpreter** 선택
+
+1. `.\env`로 시작하는 가상 환경 선택
+
+1. 새 터미널 열기. 자체 활성화 스크립트를 실행하며 가상 환경이 자동으로 활성화된다. *//커맨드 프롬프트에 `(.venv)`라 보임*
+
+1. 다음 명령어로 가상 환경 위에 Django 설치하기.
+
+    ```
+    python -m pip install django
+    ```
 
 (계속)
