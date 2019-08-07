@@ -132,6 +132,8 @@ Django는 빠르고 안전하고 확장성있는 웹개발을 위한 파이썬 �
 
 기본 형태의 페이지 3개를 가진 간단한 Django 앱을 만들어보자.
 
+[Django Tutorial in Visual Studio Code](https://code.visualstudio.com/docs/python/tutorial-django)
+
 1. `hello_django` 폴더 생성
 
 1. 다음 명령어로 `env`라는 이름의 가상 환경 생성
@@ -144,10 +146,46 @@ Django는 빠르고 안전하고 확장성있는 웹개발을 위한 파이썬 �
 
 1. 새 터미널 열기. 자체 활성화 스크립트를 실행하며 가상 환경이 자동으로 활성화된다. *//커맨드 프롬프트에 `(.venv)`라 보임*
 
-1. 다음 명령어로 가상 환경 위에 Django 설치하기.
+1. 다음 명령어로 가상 환경 위에 Django 설치
 
     ```
     python -m pip install django
     ```
+
+1. Django 관리 유틸리티인 `django-admin` 생성
+
+    가상 환경이 실행되고 있는 상태에서, 다음 명령어 실행
+    
+    ```
+    django-admin startproject web_project .
+    ```
+
+    `manage.py`는 Django 커맨드라인 관리 유틸리티. `python manage.py <command> [options]` 으로 관리 명령 실행 가능.
+    
+    `web_projcet` 이하에는 다음 파일들이 포함
+
+    - `__init__.py` : 해당 폴더는 파이썬 패키지라는 것을 의미하는 빈 파일
+
+    - `wsgi.py` : WSGI-호환 웹서버 진입 지점 *//?*
+
+    - `settings.py` : 웹 앱 개발 시 Django 프로젝트 설정
+
+    - `urls.py` : Django 프로젝트 목차 포함
+
+1. `python manage.py runserver` 명령어로 Django 개발 서버 시작.
+
+    기본 포트 번호는 8000.
+    ```
+    You have 17 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+    Run 'python manage.py migrate' to apply them.
+    August 07, 2019 - 18:42:05
+    Django version 2.2.4, using settings 'web_project.settings'
+    Starting development server at http://127.0.0.1:8000/
+    Quit the server with CTRL-BREAK.
+    ```
+
+    브라우저에서 `http://127.0.0.1:8000/`에 접속해 보자.
+
+1. `Ctrl+C`로 서버 정지 
 
 (계속)
