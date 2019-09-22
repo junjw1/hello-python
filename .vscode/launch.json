@@ -11,6 +11,18 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "stopOnEntry": true
+        },
+        {
+            "name": "Python: Django",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/hello_django/manage.py",
+            "console": "integratedTerminal",
+            "args" : [
+                "runserver",
+                "--noreload"
+            ],
+            "django": true
         }
     ]
 }
