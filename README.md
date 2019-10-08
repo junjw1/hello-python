@@ -15,7 +15,7 @@
 
 ## 파이썬 설치
 
-1. https://www.python.org/ 윈도우 설치 *//Path 환경변수에 경로 추가 체크*
+1. https://www.python.org/ 윈도우 설치 *// Path 환경변수에 경로 추가 체크했음*
 1. cmd에서 `python --version` 명령어로 버전 확인
     ```
     Python 3.7.4
@@ -144,7 +144,7 @@ Django는 빠르고 안전하고 확장성있는 웹개발을 위한 파이썬 �
 
 1. `.\env`로 시작하는 가상 환경 선택
 
-1. 새 터미널 열기. 자체 활성화 스크립트를 실행하며 가상 환경이 자동으로 활성화된다. *//커맨드 프롬프트에 `(.venv)`라 보임*
+1. 새 터미널 열기. 자체 활성화 스크립트를 실행하며 가상 환경이 자동으로 활성화된다. *// 커맨드 프롬프트에 `(.venv)`라 보임*
 
 1. 다음 명령어로 가상 환경 위에 Django 설치
 
@@ -166,7 +166,7 @@ Django는 빠르고 안전하고 확장성있는 웹개발을 위한 파이썬 �
 
     - `__init__.py` : 해당 폴더는 파이썬 패키지라는 것을 의미하는 빈 파일
 
-    - `wsgi.py` : WSGI-호환 웹서버 진입 지점 *//?*
+    - `wsgi.py` : WSGI-호환 웹서버 진입 지점 *// ? 이게 뭐지 ?*
 
     - `settings.py` : 웹 앱 개발 시 Django 프로젝트 설정
 
@@ -175,11 +175,7 @@ Django는 빠르고 안전하고 확장성있는 웹개발을 위한 파이썬 �
 1. `python manage.py runserver` 명령어로 Django 개발 서버 시작.
 
     기본 포트 번호는 8000.
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> c7c226f21caf82415c8ed8d4169dbfd2adaa4564
     ```
     You have 17 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
     Run 'python manage.py migrate' to apply them.
@@ -362,19 +358,140 @@ Django는 빠르고 안전하고 확장성있는 웹개발을 위한 파이썬 �
 
 1. 브라우저 닫고 디버거 정지(`Shift+F5`)
 
-## Vue.js
+## HTML과 Vue.js코드로 todo 앱 만들기
 
 Vue.js의 핵심은 **간단한 템플릿 구문을 사용해 선언적으로 DOM에 데이터를 렌더링하는 것**이다.
 
 [Vue.js 가이드](https://kr.vuejs.org/v2/guide/)
 
-DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍 언어가 해당 구조에 접근할 수 있는 방법을 제공한다.
+DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍 언어가 DOM 구조에 접근할 수 있는 방법을 제공한다.
 
-[DOM이란?](https://developer.mozilla.org/ko/docs/Web/API/Document_Object_Model/%EC%86%8C%EA%B0%9C)
-[DOM이란? 2](https://shldhee.github.io/2018/04/08/DOM/)
+[DOM이란?](https://developer.mozilla.org/ko/docs/Web/API/Document_Object_Model/%EC%86%8C%EA%B0%9C) *// dom 설명이 엄청 추상적이네.. 이해하기 힘듦.. 반복해서 읽으니 이해될듯 말듯*
 
-## HTML과 Vue.js코드로 todo 앱 만들기
+[DOM이란? 2](https://shldhee.github.io/2018/04/08/DOM/) 
 
 `html_todo/todo.html` 문서
+
+```
+생략
+```
+
+## Django 프로젝트 뼈대 완성하기
+
+1. `django_todo` 폴더 생성 및 가상환경 생성 및 활성화 하기
+
+    ```
+    python -m venv env
+    ```
+
+    `django_todo/env` 폴더로 가상환경이 생성됨
+    
+    `Ctrl+Shift+P`를 눌러 **Python: Select Interpreter** 선택하여 `.\env`로 시작하는 가상 환경 선택하기. *// ? 왜 안보이지 ? 해당 `django_todo` 폴더가 최상위가 아니라서 그런가봄*
+
+    `env\Scripts\activate` 명령어로 활성화 스크립트 직접 실행하여 가상환경 직접 활성화
+
+    ```
+    E:\jjw\project\hello-python\django_todo>env\Scripts\activate
+
+    (env) E:\jjw\project\hello-python\django_todo>
+    ```
+
+1. 가상환경 위에 Django 설치
+
+    ```
+    (env) E:\jjw\project\hello-python\django_todo>python -m pip install django
+    Collecting django
+    ..생략..
+    ```
+
+    시간이 좀 걸릴 수 있음. django 설치 후 버전 확인해보기.
+    
+    ```
+    (env) E:\jjw\project\hello-python\django_todo>django-admin --version
+    2.2.6
+    ```
+
+1. Djnago 프로젝트 뼈대 만들기
+    
+    mysite 프로젝트 폴더를 현재폴더에 생성하기
+
+    ```
+    (env) E:\jjw\project\hello-python\django_todo>django-admin startproject mysite .
+
+    (env) E:\jjw\project\hello-python\django_todo>dir
+    E 드라이브의 볼륨: My Passport
+    볼륨 일련 번호: 04C1-0CCD
+
+    E:\jjw\project\hello-python\django_todo 디렉터리
+
+    2019-10-08  오후 09:30    <DIR>          .
+    2019-10-08  오후 09:30    <DIR>          ..
+    2019-10-08  오후 09:32    <DIR>          env
+    2019-10-08  오후 09:57               647 manage.py // django 명령어 파일
+    2019-10-08  오후 09:57    <DIR>          mysite // 프로젝트 폴더
+                1개 파일                 647 바이트
+                4개 디렉터리  970,414,096,384 바이트 남음
+    ```
+
+    엡 폴더 생성하기
+
+    ```
+    (env) E:\jjw\project\hello-python\django_todo>django-admin startapp todo
+
+    (env) E:\jjw\project\hello-python\django_todo>dir
+
+    E:\jjw\project\hello-python\django_todo 디렉터리
+
+    2019-10-08  오후 09:30    <DIR>          .
+    2019-10-08  오후 09:30    <DIR>          ..
+    2019-10-08  오후 09:32    <DIR>          env
+    2019-10-08  오후 09:57               647 manage.py // django 명령어 파일
+    2019-10-08  오후 09:57    <DIR>          mysite // 프로젝트 폴더
+    2019-10-08  오후 09:58    <DIR>          todo // 앱 폴더
+                1개 파일                 647 바이트
+                5개 디렉터리  970,406,756,352 바이트 남음
+    ```
+
+    DB 및 테이블 생성하기
+
+    ```
+    (env) E:\jjw\project\hello-python\django_todo>python manage.py migrate
+    Operations to perform:
+    Apply all migrations: admin, auth, contenttypes, sessions
+    Running migrations:
+    Applying contenttypes.0001_initial... OK
+    Applying auth.0001_initial... OK
+    Applying admin.0001_initial... OK
+    
+    ..생략..
+
+    (env) E:\jjw\project\hello-python\django_todo>dir
+
+    E:\jjw\project\hello-python\django_todo 디렉터리
+
+    2019-10-08  오후 09:30    <DIR>          .
+    2019-10-08  오후 09:30    <DIR>          ..
+    2019-10-08  오후 09:32    <DIR>          env
+    2019-10-08  오후 09:57               647 manage.py // django 명령어 파일
+    2019-10-08  오후 09:57    <DIR>          mysite // 프로젝트 폴더
+    2019-10-08  오후 09:58    <DIR>          todo // 앱 폴더
+    2019-10-08  오후 10:02           131,072 db.sqlite3 // DB
+                2개 파일             131,719 바이트
+                5개 디렉터리  970,401,513,472 바이트 남음
+    ```
+
+    관리자 계정 생성하기
+
+    ```
+    (env) E:\jjw\project\hello-python\django_todo>python manage.py createsuperuser
+    Username (leave blank to use 'junjw'): jjw
+    Email address: junjw1@daum.net
+    Password:
+    Password (again):
+    The password is too similar to the username.
+    This password is too short. It must contain at least 8 characters.
+    Bypass password validation and create user anyway? [y/N]: y
+    Superuser created successfully.
+    ```
 
 (계속)
