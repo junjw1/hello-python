@@ -25,7 +25,7 @@
                 <span>삭제</span>
             </li -->
             <li v-for="(todo, index) in todoItems"> <!-- v-for 디렉티브로 바인딩. 단방향 뷰 to html -->
-                <span>{{ todo.name }} :: {{ todo.item }}</span> <!-- 머스태쉬 표현식 -->
+                <span>{ todo.name } :: { todo.item }</span> <!-- 머스태쉬 표현식 -->
                 <span v-on:click="remove_todo(index)">삭제</span>
             </li>
         </ul>
@@ -36,6 +36,7 @@
     <script>
         // 1)뷰인스턴스 작성
         var vm = new Vue({
+            delimiters: ['{', '}'], // 머스태시 문법의 중괄호를 하나만 사용하겠다는 의미
             el: '#app', // 엘리먼트 옵션 - 뷰 인스턴스를 적용한 엘리먼트를 지정
             data: {
                 name: '',

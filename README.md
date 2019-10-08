@@ -381,14 +381,14 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
 1. `django_todo` 폴더 생성 및 가상환경 생성 및 활성화 하기
 
     ```
-    python -m venv env
+    E:\jjw\project\hello-python\django_todo>python -m venv env
     ```
 
     `django_todo/env` 폴더로 가상환경이 생성됨
     
     `Ctrl+Shift+P`를 눌러 **Python: Select Interpreter** 선택하여 `.\env`로 시작하는 가상 환경 선택하기. *// ? 왜 안보이지 ? 해당 `django_todo` 폴더가 최상위가 아니라서 그런가봄*
 
-    `env\Scripts\activate` 명령어로 활성화 스크립트 직접 실행하여 가상환경 직접 활성화
+    `activate` 가상환경 활성화 스크립트 직접 실행하여 가상환경 직접 활성화
 
     ```
     E:\jjw\project\hello-python\django_todo>env\Scripts\activate
@@ -419,10 +419,6 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
     (env) E:\jjw\project\hello-python\django_todo>django-admin startproject mysite .
 
     (env) E:\jjw\project\hello-python\django_todo>dir
-    E 드라이브의 볼륨: My Passport
-    볼륨 일련 번호: 04C1-0CCD
-
-    E:\jjw\project\hello-python\django_todo 디렉터리
 
     2019-10-08  오후 09:30    <DIR>          .
     2019-10-08  오후 09:30    <DIR>          ..
@@ -439,8 +435,6 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
     (env) E:\jjw\project\hello-python\django_todo>django-admin startapp todo
 
     (env) E:\jjw\project\hello-python\django_todo>dir
-
-    E:\jjw\project\hello-python\django_todo 디렉터리
 
     2019-10-08  오후 09:30    <DIR>          .
     2019-10-08  오후 09:30    <DIR>          ..
@@ -467,8 +461,6 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
 
     (env) E:\jjw\project\hello-python\django_todo>dir
 
-    E:\jjw\project\hello-python\django_todo 디렉터리
-
     2019-10-08  오후 09:30    <DIR>          .
     2019-10-08  오후 09:30    <DIR>          ..
     2019-10-08  오후 09:32    <DIR>          env
@@ -493,5 +485,91 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
     Bypass password validation and create user anyway? [y/N]: y
     Superuser created successfully.
     ```
+
+## MVT 순서로 코딩하기
+
+- settings.py
+- models.py
+- urls.py
+- views.py
+- templates
+
+코딩 시작
+
+1. `mysite/settings.py`
+
+    todo앱 등록하기. *// 클래스까지 명시해줌*
+
+    프로젝트 템플릿 디렉토리 지정하기.
+
+    타임존 수정하기.
+
+    STATICFILES_DIR 지정하기.
+
+1. `mysite/models.py`
+
+    테이블 추가할 사항 없으므로 스킵
+
+1. `mysite/urls.py`
+
+    todo.urls를 include 하기.
+
+1. `todo/urls.py`
+
+    app namespace는 todo
+
+    todo 다음에 vonly라는 url이 들어왔을 때
+
+    뷰 이름은 TodoVueOnlyTV
+
+    url 패턴 이름은 vonly
+
+1. `todo/views.py`
+
+    클래스 이름 TodoVueOnlyTV
+
+    템플릿 이름 'todo/todo_vueonly.html'
+
+1. HTML 생성하기
+
+    todo/templates/todo 디렉토리 생성하고
+    
+    `todo_vueonly.html` 작성하기. (이전 html 복사)
+
+1. 서버 실행하고 접속하기.
+
+    ```
+    (env) E:\jjw\project\hello-python\django_todo>manage.py runserver
+    Watching for file changes with StatReloader
+    Performing system checks...
+
+    System check identified no issues (0 silenced).
+    October 08, 2019 - 22:59:17
+    Django version 2.2.6, using settings 'mysite.settings'
+    Starting development server at http://127.0.0.1:8000/
+    Quit the server with CTRL-BREAK.
+    ```
+
+    http://127.0.0.1:8000/todo/vonly/ 에 접속
+
+    만들었던 html 문서가 잘 나오는가?
+
+    todo 리스트 등록은 잘 되는가?
+
+    Vue.js의 머스태시 문법과 장고의 템플릿 문법과 충돌하기 때문이다.
+
+    vue.js에서 머스태시 문법을 수정하자. 뷰 객체에서 delimiters 옵션 적용하여 중괄호를 1개만 쓰기.
+
+    todo 리스트 등록 동작 확인.
+
+1. `Ctrl+C`로 서버 정지
+
+### 체크포인트
+
+- [x] 파이썬 가상환경 생성 및 활성화
+- [x] django 설치 및 프로젝트 뼈대 생성
+- [x] MVT 순서로 코드 편집
+- [x] 서버 정상 실행 및 접속
+- [x] todo 리스트 등록 동작 확인
 
 (계속)
