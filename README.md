@@ -175,6 +175,7 @@ Django는 빠르고 안전하고 확장성있는 웹개발을 위한 파이썬 �
 1. `python manage.py runserver` 명령어로 Django 개발 서버 시작.
 
     기본 포트 번호는 8000.
+
     ```
     You have 17 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
     Run 'python manage.py migrate' to apply them.
@@ -187,5 +188,19 @@ Django는 빠르고 안전하고 확장성있는 웹개발을 위한 파이썬 �
     브라우저에서 `http://127.0.0.1:8000/`에 접속해 보자.
 
 1. `Ctrl+C`로 서버 정지 
+
+## Vue.js
+
+Vue.js의 핵심은 **간단한 템플릿 구문을 사용해 선언적으로 DOM에 데이터를 렌더링하는 것**이다.
+
+[Vue.js 가이드](https://kr.vuejs.org/v2/guide/)
+
+DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍 언어가 해당 구조에 접근할 수 있는 방법을 제공한다.
+
+[DOM이란?](https://developer.mozilla.org/ko/docs/Web/API/Document_Object_Model/%EC%86%8C%EA%B0%9C)
+
+## HTML과 Vue.js코드로 todo 앱 만들기
+
+`html_todo/todo.html` 문서
 
 (계속)

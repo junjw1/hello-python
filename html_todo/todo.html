@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>jjw to do app</title>
+    
+    <style>
+    </style>
+    
+</head>
+<body>
+    <div id='app'>
+        <h1>my to do</h1>
+        <strong>할 일 관리</strong>
+
+        <div>
+            <input type="text" placeholder="이름" v-model="name"> <!-- input 태그와 데이터 바인딩하기 위해 v-model 디렉티브 사용. 양방향 -->
+            <input type="text" placeholder="내용" v-model="newTodoItem" v-on:keyup.enter="add_todo()"> <!-- 데이터 바인딩이란 뷰 코드와 html간 데이터 연결. -->
+            <button v-on:click="add_todo()">등록</button> <!-- 클릭하면 add_todo 메서드 호출 -->
+        </div>
+
+        <ul>
+            <!-- li>
+                <span>jjw :: 장고뷰 듀도리얼 따라하기</span>
+                <span>삭제</span>
+            </li -->
+            <li v-for="(todo, index) in todoItems"> <!-- v-for 디렉티브로 바인딩. 단방향 뷰 to html -->
+                <span>{{ todo.name }} :: {{ todo.item }}</span> <!-- 머스태쉬 표현식 -->
+                <span v-on:click="remove_todo(index)">삭제</span>
+            </li>
+        </ul>
+    </div>
+    
+    <!-- 도움되는 콘솔 경고를 포함한 개발 버전 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // 1)뷰인스턴스 작성
+        var vm = new Vue({
+            el: '#app', // 엘리먼트 옵션 - 뷰 인스턴스를 적용한 엘리먼트를 지정
+            data: {
+                name: '',
+                newTodoItem: '',
+                todoItems:[
+                    {name: 'jjw', item: 'hello'},
+                    {name: 'jjw2', item: 'hello2'},
+                    {name: 'jjw3', item: 'hello3'},
+                ]
+            }, // 데이터 옵션 - dom 엘리먼트에서 사용할 데이터 지정
+            methods: {
+                add_todo: function(){
+                    if(this.name == '') this.name = 'nobody';
+                    if(this.newTodoItem == '') return;
+                    
+                    this.todoItems.push({name: this.name, item: this.newTodoItem});
+
+                    this.name = '';
+                    this.newTodoItem = '';
+                },
+                remove_todo: function(index){
+                    this.todoItems.splice(index, 1);
+                }
+            }, // 메서드 옵션
+        }) // 뷰의 역할은 dom 엘리먼트에 필요한 데이터와 메서드를 제공해줌
+    </script>
+</body>
+</html>
