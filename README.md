@@ -30,7 +30,7 @@
 
 ## Hello World 실행
 
-1. `hello` 폴더 생성 및 `hello.py` 작성
+1. `00-hello` 폴더 생성 및 `hello.py` 작성
 
     hello/hello.py :
 
@@ -134,7 +134,7 @@ Django는 빠르고 안전하고 확장성있는 웹개발을 위한 파이썬 �
 
 [Django Tutorial in Visual Studio Code](https://code.visualstudio.com/docs/python/tutorial-django)
 
-1. `hello_django` 폴더 생성
+1. `01-hello-django` 폴더 생성
 
 1. 다음 명령어로 `env`라는 이름의 가상 환경 생성
     ```
@@ -191,10 +191,10 @@ Django는 빠르고 안전하고 확장성있는 웹개발을 위한 파이썬 �
 
 ## Django 앱 생성하기
 
-1. `hello_django` 프로젝트 폴더에서 다음 커맨드 실행
+1. `01-hello-django` 프로젝트 폴더에서 다음 커맨드 실행
 
     ```
-    python manage.py startapp hello
+    ..\01-hello-django>python manage.py startapp hello
     ```
     
     위 커맨드를 실행하면 `hello` 라는 폴더를 생성함. 그 폴더 아래에는 여러개의 코드 파일과 하나의 폴더가 있음. 그 중에서 `views.py`와 `models.py`를 자주 작업하게 될 거임
@@ -370,7 +370,7 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
 
 [DOM이란? 2](https://shldhee.github.io/2018/04/08/DOM/) 
 
-`html_todo/todo.html` 문서
+`02-html-todo/todo.html` 문서
 
 ```
 생략
@@ -378,28 +378,28 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
 
 ## Django 프로젝트 뼈대 완성하기
 
-1. `django_todo` 폴더 생성 및 가상환경 생성 및 활성화 하기
+1. `03-django-todo` 폴더 생성 및 가상환경 생성 및 활성화 하기
 
     ```
-    E:\jjw\project\hello-python\django_todo>python -m venv env
+    ..\03-django-todo>python -m venv env
     ```
 
-    `django_todo/env` 폴더로 가상환경이 생성됨
+    `03-django-todo/env` 폴더로 가상환경이 생성됨
     
-    `Ctrl+Shift+P`를 눌러 **Python: Select Interpreter** 선택하여 `.\env`로 시작하는 가상 환경 선택하기. *// ? 왜 안보이지 ? 해당 `django_todo` 폴더가 최상위가 아니라서 그런가봄*
+    `Ctrl+Shift+P`를 눌러 **Python: Select Interpreter** 선택하여 `.\env`로 시작하는 가상 환경 선택하기. *// ? 왜 안보이지 ? 해당 `03-django-todo` 폴더가 최상위가 아니라서 그런가봄*
 
     `activate` 가상환경 활성화 스크립트 직접 실행하여 가상환경 직접 활성화
 
     ```
-    E:\jjw\project\hello-python\django_todo>env\Scripts\activate
+    ..\03-django-todo>env\Scripts\activate
 
-    (env) E:\jjw\project\hello-python\django_todo>
+    (env) ..\03-django-todo>
     ```
 
 1. 가상환경 위에 Django 설치
 
     ```
-    (env) E:\jjw\project\hello-python\django_todo>python -m pip install django
+    (env) ..\03-django-todo>python -m pip install django
     Collecting django
     ..생략..
     ```
@@ -407,7 +407,7 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
     시간이 좀 걸릴 수 있음. django 설치 후 버전 확인해보기.
     
     ```
-    (env) E:\jjw\project\hello-python\django_todo>django-admin --version
+    (env) ..\03-django-todo>django-admin --version
     2.2.6
     ```
 
@@ -416,9 +416,9 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
     mysite 프로젝트 폴더를 현재폴더에 생성하기
 
     ```
-    (env) E:\jjw\project\hello-python\django_todo>django-admin startproject mysite .
+    (env) ..\03-django-todo>django-admin startproject mysite .
 
-    (env) E:\jjw\project\hello-python\django_todo>dir
+    (env) ..\03-django-todo>dir
 
     2019-10-08  오후 09:30    <DIR>          .
     2019-10-08  오후 09:30    <DIR>          ..
@@ -432,9 +432,9 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
     엡 폴더 생성하기
 
     ```
-    (env) E:\jjw\project\hello-python\django_todo>django-admin startapp todo
+    (env) ..\03-django-todo>django-admin startapp todo
 
-    (env) E:\jjw\project\hello-python\django_todo>dir
+    (env) ..\03-django-todo>dir
 
     2019-10-08  오후 09:30    <DIR>          .
     2019-10-08  오후 09:30    <DIR>          ..
@@ -449,7 +449,7 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
     DB 및 테이블 생성하기
 
     ```
-    (env) E:\jjw\project\hello-python\django_todo>python manage.py migrate
+    (env) ..\03-django-todo>python manage.py migrate
     Operations to perform:
     Apply all migrations: admin, auth, contenttypes, sessions
     Running migrations:
@@ -459,7 +459,7 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
     
     ..생략..
 
-    (env) E:\jjw\project\hello-python\django_todo>dir
+    (env) ..\03-django-todo>dir
 
     2019-10-08  오후 09:30    <DIR>          .
     2019-10-08  오후 09:30    <DIR>          ..
@@ -475,7 +475,7 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
     관리자 계정 생성하기
 
     ```
-    (env) E:\jjw\project\hello-python\django_todo>python manage.py createsuperuser
+    (env) ..\03-django-todo>python manage.py createsuperuser
     Username (leave blank to use 'junjw'): jjw
     Email address: junjw1@daum.net
     Password:
@@ -486,7 +486,9 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
     Superuser created successfully.
     ```
 
-## MVT 순서로 코딩하기
+## Django에 HTML 파일 수용하기
+
+### MVT 순서로 코딩하기
 
 - settings.py
 - models.py
@@ -539,7 +541,7 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
 1. 서버 실행하고 접속하기.
 
     ```
-    (env) E:\jjw\project\hello-python\django_todo>manage.py runserver
+    (env) ..\03-django-todo>manage.py runserver
     Watching for file changes with StatReloader
     Performing system checks...
 
@@ -556,9 +558,9 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
 
     todo 리스트 등록은 잘 되는가?
 
-    Vue.js의 머스태시 문법과 장고의 템플릿 문법과 충돌하기 때문이다.
+    Vue.js의 머스태쉬 문법과 장고의 템플릿 문법과 충돌하기 때문이다.
 
-    vue.js에서 머스태시 문법을 수정하자. 뷰 객체에서 delimiters 옵션 적용하여 중괄호를 1개만 쓰기.
+    Vue.js에서 머스태쉬 문법을 수정하자. 뷰 객체에서 delimiters 옵션 적용하여 중괄호를 1개만 쓰기.
 
     todo 리스트 등록 동작 확인.
 
@@ -571,5 +573,94 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
 - [x] MVT 순서로 코드 편집
 - [x] 서버 정상 실행 및 접속
 - [x] todo 리스트 등록 동작 확인
+
+## Django로 todo앱 코딩하기
+
+Vue.js없이 Django로만 todo앱 만들어보기
+
+### 클래스형 뷰 사용하기
+
+순서로 코딩 시작
+
+1. `mysite/settings.py`
+
+1. `mysite/models.py`
+
+이름이 Todo인 모델(테이블)을 정의
+컬럼 및 스트링 메소드 작성
+
+1. `todo/admin.py`
+
+테이블 신규 정의 시 admin 사이트에서도 보이도록 등록
+
+1. DB에 데이터 반영
+
+현재 상태 확인
+
+```
+(env) E:\jjw\project\hello-python\03-django-todo>python manage.py showmigrations
+admin
+ [X] 0001_initial
+ [X] 0002_logentry_remove_auto_add
+ [X] 0003_logentry_add_action_flag_choices
+auth
+ [X] 0001_initial
+ [X] 0002_alter_permission_name_max_length
+ [X] 0003_alter_user_email_max_length
+ [X] 0004_alter_user_username_opts
+ [X] 0005_alter_user_last_login_null
+ [X] 0006_require_contenttypes_0002
+ [X] 0007_alter_validators_add_error_messages
+ [X] 0008_alter_user_username_max_length
+ [X] 0009_alter_user_last_name_max_length
+ [X] 0010_alter_group_name_max_length
+ [X] 0011_update_proxy_permissions
+contenttypes
+ [X] 0001_initial
+ [X] 0002_remove_content_type_name
+sessions
+ [X] 0001_initial
+todo
+ (no migrations)
+```
+
+마이그레이션 파일 만들기
+
+```
+(env) E:\jjw\project\hello-python\03-django-todo>python manage.py makemigrations
+Migrations for 'todo':
+  todo\migrations\0001_initial.py
+    - Create model Todo
+```
+
+DB에 반영하여 테이블 만들기
+
+```
+(env) E:\jjw\project\hello-python\03-django-todo>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions, todo
+Running migrations:
+  Applying todo.0001_initial... OK
+```
+
+서버 실행하고 `http://127.0.0.1:8000/admin`로 접속 하면 Todo테이블이 생성 된 것을 볼 수 있음
+
+데이터 하나 저장해보자.
+
+`Ctrl+C`로 서버 정지.
+
+1. `mysite/urls.py`
+
+변경사항 없음
+
+1. `todo/urls.py`
+
+장고 URL 설계
+
+
+1. `todo/urls.py`
+
+1. `todo/views.py`
+
 
 (계속)

@@ -5,3 +5,6 @@ env/
 
 # Exclude machine-specific vs code settings
 .vscode/settings.json
+
+# pycache
+__pycache__/
