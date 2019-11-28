@@ -380,6 +380,8 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
 
 1. `03-django-todo` 폴더 생성 및 가상환경 생성 및 활성화 하기
 
+    `>python -m venv env`
+
     ```
     ..\03-django-todo>python -m venv env
     ```
@@ -391,12 +393,17 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
     `activate` 가상환경 활성화 스크립트 직접 실행하여 가상환경 직접 활성화
 
     ```
+
+    `>env\Scripts\activate`
+    
     ..\03-django-todo>env\Scripts\activate
 
     (env) ..\03-django-todo>
     ```
 
 1. 가상환경 위에 Django 설치
+
+    `>python -m pip install django`
 
     ```
     (env) ..\03-django-todo>python -m pip install django
@@ -405,6 +412,8 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
     ```
 
     시간이 좀 걸릴 수 있음. django 설치 후 버전 확인해보기.
+
+    `>django-admin --version`
     
     ```
     (env) ..\03-django-todo>django-admin --version
@@ -414,6 +423,8 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
 1. Djnago 프로젝트 뼈대 만들기
     
     mysite 프로젝트 폴더를 현재폴더에 생성하기
+
+    `>django-admin startproject mysite .`
 
     ```
     (env) ..\03-django-todo>django-admin startproject mysite .
@@ -431,6 +442,8 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
 
     엡 폴더 생성하기
 
+    `>django-admin startapp todo`
+
     ```
     (env) ..\03-django-todo>django-admin startapp todo
 
@@ -447,6 +460,8 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
     ```
 
     DB 및 테이블 생성하기
+
+    `>python manage.py migrate`
 
     ```
     (env) ..\03-django-todo>python manage.py migrate
@@ -473,6 +488,8 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
     ```
 
     관리자 계정 생성하기
+
+    `>python manage.py createsuperuser`
 
     ```
     (env) ..\03-django-todo>python manage.py createsuperuser
@@ -539,6 +556,8 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
     `todo_vueonly.html` 작성하기. (이전 html 복사)
 
 1. 서버 실행하고 접속하기.
+
+    `>manage.py runserver`
 
     ```
     (env) ..\03-django-todo>manage.py runserver
@@ -741,54 +760,42 @@ MVT 순서로 코딩 시작
     `todo_form.html`
 
     ``` html
-    <div id='app'>
-        
-        <h1>my to do</h1>
-        <strong>할 일 관리</strong>
+    <h1>my to do</h1>
+    <strong>할 일 관리</strong>
 
-        <form action="." method="post"> {% csrf_token %} <!-- form 태그에 action, method 속성 지정 --> <!-- django에서 제공하는 템플릿 태그. csrf 공격 방지 -->
-            <input type="text" placeholder="이름" name="name"> <!-- name 변수명은 todo테이블의 컬럼명과 동일해야 -->
-            <input type="text" placeholder="내용" name="todo">
-            <button type="submit">등록</button> <!-- 클릭 시 서버로 전송하기 위해 submit 타입 지정 -->
-        </form>
-
-    </div>
+    <form action="." method="post"> {% csrf_token %} <!-- form 태그에 action, method 속성 지정 --> <!-- django에서 제공하는 템플릿 태그. csrf 공격 방지 -->
+        <input type="text" placeholder="이름" name="name"> <!-- name 변수명은 todo테이블의 컬럼명과 동일해야 -->
+        <input type="text" placeholder="내용" name="todo">
+        <button type="submit">등록</button> <!-- 클릭 시 서버로 전송하기 위해 submit 타입 지정 -->
+    </form>
     ```
 
     `todo_list.html`
 
     ``` html
-    <div id='app'>
+    <h1>my to do</h1>
+    <strong>할 일 관리</strong>
 
-        <h1>my to do</h1>
-        <strong>할 일 관리</strong>
-
-        <ul>
-            {% for todo in object_list %} <!-- v-for 대신 django의 템플릿 태그로 변경. ListView에서는 object_list 라는 컨택스트 변수를 넘겨준다. -->
-            <li>
-                <span>{{ todo.name }} :: {{ todo.todo }}</span> <!-- vue.js의 머스태시 문법을 django의 문법으로 변경 -->
-                <span><a href="{% url 'todo:delete' todo.id %}">&#x00D7</a></span> <!-- 삭제 버튼 클릭 시 동작. 클릭 시 delete url을 요청하고, todo.id를 파라미터로 설정 -->
-            </li>
-            {% endfor %}
-        </ul>
-
-    </div>
+    <ul>
+        {% for todo in object_list %} <!-- v-for 대신 django의 템플릿 태그로 변경. ListView에서는 object_list 라는 컨택스트 변수를 넘겨준다. -->
+        <li>
+            <span>{{ todo.name }} :: {{ todo.todo }}</span> <!-- vue.js의 머스태시 문법을 django의 문법으로 변경 -->
+            <span><a href="{% url 'todo:delete' todo.id %}">&#x00D7</a></span> <!-- 삭제 버튼 클릭 시 동작. 클릭 시 delete url을 요청하고, todo.id를 파라미터로 설정 -->
+        </li>
+        {% endfor %}
+    </ul>
     ```
 
     `todo_confirm_delete.html`
 
     ``` html
-    <div id='app'>
+    <h1>Todo Delete</h1>
+    <p>정말로 삭제하시겠습니까? {{ object }} </p> <!-- 컨택스트 변수 object를 넘겨줌 -->
+    <br>
 
-        <h1>Todo Delete</h1>
-        <p>정말로 삭제하시겠습니까? {{ object }} </p> <!-- 컨택스트 변수 object를 넘겨줌 -->
-        <br>
-
-        <form action="." method="post"> {% csrf_token %} 
-            <button type="submit">확인</button>
-        </form>
-
-    </div>
+    <form action="." method="post"> {% csrf_token %} 
+        <button type="submit">확인</button>
+    </form>
     ```
 1. 저장하고, 조회하고, 삭제해보자.
 
