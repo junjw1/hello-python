@@ -693,7 +693,9 @@ MVT 순서로 코딩 시작
     /todo/list/ | TodoLV | todo_list.html
     /todo/99/delete/ | TodoDelV | todo_confirm_delete.html
 
-1. `todo/urls.py`
+1. url 패턴 설정
+
+    `todo/urls.py`
 
     ```python
     from django.urls import path
@@ -707,7 +709,9 @@ MVT 순서로 코딩 시작
     ]
 
     ```
-1. `todo/views.py`
+1. 뷰 생성
+
+    `todo/views.py`
 
     ```python
     class TodoCV(CreateView):
@@ -734,7 +738,7 @@ MVT 순서로 코딩 시작
 
     `todo_vueonly.html` 와 비교하며 코딩해보자.
 
-    1. `todo_form.html`
+    `todo_form.html`
 
     ``` html
     <div id='app'>
@@ -751,7 +755,7 @@ MVT 순서로 코딩 시작
     </div>
     ```
 
-    1. `todo_list.html`
+    `todo_list.html`
 
     ``` html
     <div id='app'>
@@ -771,7 +775,7 @@ MVT 순서로 코딩 시작
     </div>
     ```
 
-    1. `todo_confirm_delete.html`
+    `todo_confirm_delete.html`
 
     ``` html
     <div id='app'>
