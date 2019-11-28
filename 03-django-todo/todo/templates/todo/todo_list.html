@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>jjw to do app</title>
+    
+    <style>
+    </style>
+    
+</head>
+<body>
+    <div id='app'>
+
+        <h1>my to do</h1>
+        <strong>할 일 관리</strong>
+
+        <ul>
+            {% for todo in object_list %} <!-- v-for 대신 django의 템플릿 태그로 변경. ListView에서는 object_list 라는 컨택스트 변수를 넘겨준다. -->
+            <li>
+                <span>{{ todo.name }} :: {{ todo.todo }}</span> <!-- vue의 머스태시 문법을 django의 문법으로 변경 -->
+                <span><a href="{% url 'todo:delete' todo.id %}">&#x00D7</a></span> <!-- 삭제 버튼 클릭 시 동작. 클릭 시 delete url이 요청되도록 하고, todo.id를 파라미터로 설정 -->
+            </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+</body>
+</html>

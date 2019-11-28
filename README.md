@@ -578,89 +578,216 @@ DOM은 문서(HTML, XML)의 구조화된 표현을 제공하고, 프로그래밍
 
 Vue.js없이 Django로만 todo앱 만들어보기
 
-### 클래스형 뷰 사용하기
+### 클래스형 뷰
 
-순서로 코딩 시작
+자주 사용되는 기능들을 Django에서 미리 만들어 클래스형 뷰로 제공하고 있다.
 
-1. `mysite/settings.py`
+- ListView : DB에서 레코드 목록을 가져와 보여주는 뷰
+- CreateView : 폼에 입력한 내용으로 DB에 레코드 생성하는 뷰
+- UpdateView : DB에 있는 특정 레코드를 수정하는 뷰
+- DeleteView : DB에 있는 특정 레코드를 삭제하는 뷰
+
+MVT 순서로 코딩 시작
 
 1. `mysite/models.py`
 
-이름이 Todo인 모델(테이블)을 정의
-컬럼 및 스트링 메소드 작성
+    이름이 Todo인 모델(테이블)을 정의하기.
+
+    ```python
+    from django.db import models
+
+    class Todo(models.Model):
+            name = models.CharField('NAME', max_length=5, blank=True) # 이름 컬럼
+            todo = models.CharField('TODO', max_length=50) # 내용 컬럼
+
+            def __str__(self): # 스트링 메서드
+                return self.todo
+    ```
 
 1. `todo/admin.py`
 
-테이블 신규 정의 시 admin 사이트에서도 보이도록 등록
+    테이블 신규 정의 시 admin 사이트에서도 보이도록 등록하자.
 
-1. DB에 데이터 반영
+    ```python
+    from django.contrib import admin
+    from todo.models import Todo
 
-현재 상태 확인
+    @admin.register(Todo) # 등록 위한 데코레이트
+    class TodoAdmin(admin.ModelAdmin):
+        list_display = ('id', 'name', 'todo') # admin 사이트에서 보여줄 컬럼들
+    ```
 
-```
-(env) E:\jjw\project\hello-python\03-django-todo>python manage.py showmigrations
-admin
- [X] 0001_initial
- [X] 0002_logentry_remove_auto_add
- [X] 0003_logentry_add_action_flag_choices
-auth
- [X] 0001_initial
- [X] 0002_alter_permission_name_max_length
- [X] 0003_alter_user_email_max_length
- [X] 0004_alter_user_username_opts
- [X] 0005_alter_user_last_login_null
- [X] 0006_require_contenttypes_0002
- [X] 0007_alter_validators_add_error_messages
- [X] 0008_alter_user_username_max_length
- [X] 0009_alter_user_last_name_max_length
- [X] 0010_alter_group_name_max_length
- [X] 0011_update_proxy_permissions
-contenttypes
- [X] 0001_initial
- [X] 0002_remove_content_type_name
-sessions
- [X] 0001_initial
-todo
- (no migrations)
-```
+1. 모델이 변경되면 변경된 데이터를 DB에 반영하도록 설정하기.
 
-마이그레이션 파일 만들기
+    1. 현재 상태 확인
+    
+        `>python manage.py showmigrations`
 
-```
-(env) E:\jjw\project\hello-python\03-django-todo>python manage.py makemigrations
-Migrations for 'todo':
-  todo\migrations\0001_initial.py
-    - Create model Todo
-```
+        ```
+        (env) ..\03-django-todo>python manage.py showmigrations
+        admin
+        [X] 0001_initial
+        [X] 0002_logentry_remove_auto_add
+        [X] 0003_logentry_add_action_flag_choices
+        auth
+        [X] 0001_initial
+        [X] 0002_alter_permission_name_max_length
+        [X] 0003_alter_user_email_max_length
+        [X] 0004_alter_user_username_opts
+        [X] 0005_alter_user_last_login_null
+        [X] 0006_require_contenttypes_0002
+        [X] 0007_alter_validators_add_error_messages
+        [X] 0008_alter_user_username_max_length
+        [X] 0009_alter_user_last_name_max_length
+        [X] 0010_alter_group_name_max_length
+        [X] 0011_update_proxy_permissions
+        contenttypes
+        [X] 0001_initial
+        [X] 0002_remove_content_type_name
+        sessions
+        [X] 0001_initial
+        todo
+        (no migrations)
+        ```
 
-DB에 반영하여 테이블 만들기
+    1. 마이그레이션 파일 만들기
 
-```
-(env) E:\jjw\project\hello-python\03-django-todo>python manage.py migrate
-Operations to perform:
-  Apply all migrations: admin, auth, contenttypes, sessions, todo
-Running migrations:
-  Applying todo.0001_initial... OK
-```
+        `>python manage.py makemigrations`
 
-서버 실행하고 `http://127.0.0.1:8000/admin`로 접속 하면 Todo테이블이 생성 된 것을 볼 수 있음
+        ```
+        (env) ..\03-django-todo>python manage.py makemigrations
+        Migrations for 'todo':
+        todo\migrations\0001_initial.py
+            - Create model Todo
+        ```
 
-데이터 하나 저장해보자.
+    1. DB에 반영하여 테이블 만들기
 
-`Ctrl+C`로 서버 정지.
+        `>python manage.py migrate`
 
-1. `mysite/urls.py`
+        ```
+        (env) ..\03-django-todo>python manage.py migrate
+        Operations to perform:
+        Apply all migrations: admin, auth, contenttypes, sessions, todo
+        Running migrations:
+        Applying todo.0001_initial... OK
+        ```
 
-변경사항 없음
+    1. 서버 실행하여 생성된 테이블 확인하기
+
+        `>manage.py runserver`
+
+        `http://127.0.0.1:8000/admin`로 접속 하면 Todo테이블이 생성 된 것을 볼 수 있음
+
+        *// 데이터를 입력하여 저장해보자*
+
+        *// 캐굿*
+
+1. Django URL 설계
+
+    URL 패턴, 뷰, 템플릿 파일은 하나씩 매핑이 되므로 그 관계를 미리 정의해두는게 좋다.
+    
+     URL 패턴 | 뷰 | 템플릿 파일
+    -|-|-
+    /todo/create/ | TodoCV | todo_form.html
+    /todo/list/ | TodoLV | todo_list.html
+    /todo/99/delete/ | TodoDelV | todo_confirm_delete.html
 
 1. `todo/urls.py`
 
-장고 URL 설계
+    ```python
+    from django.urls import path
+    from . import views
 
+    app_name = 'todo'
+    urlpatterns = [
+        path('create/', views.TodoCV.as_view(), name='create'),
+        path('list/', views.TodoLV.as_view(), name='list'),
+        path('<int:pk>/delete/', views.TodoDelV.as_view(), name='delete'), # path convert. 숫자가 들어오면 정수로 변환하여 뷰로 넘겨줌
+    ]
 
-1. `todo/urls.py`
-
+    ```
 1. `todo/views.py`
 
+    ```python
+    class TodoCV(CreateView):
+        model = Todo # 테이블
+        fields = '__all__' # 폼을 만들기 위해 필드 필요. 모든 필드 사용
+        template_name = 'todo/todo_form.html' # 주요속성. redirectView를 제외한 모든 뷰에서 사용됨
+        success_url = reverse_lazy('todo:list') # 리다이렉트 할 url
+
+
+    class TodoLV(ListView):
+        model = Todo
+        template_name = 'todo/todo_list.html'
+
+
+    class TodoDelV(DeleteView):
+        model = Todo # 특정 레코드를 삭제해야하므로 테이블 지정
+        template_name = 'todo/todo_confirm_delete.html'
+        success_url = reverse_lazy('todo:list') # reverse() 또는 reverse_lazy() 사용해야
+    ```
+
+1. 템플릿 코딩
+
+    *// 코딩 순서를 기능 순서대로 하는 것이 좋음 (뷰1-템플릿1 작업, 뷰2-템플릿2 작업)*
+
+    `todo_vueonly.html` 와 비교하며 코딩해보자.
+
+    1. `todo_form.html`
+
+    ``` html
+    <div id='app'>
+        
+        <h1>my to do</h1>
+        <strong>할 일 관리</strong>
+
+        <form action="." method="post"> {% csrf_token %} <!-- form 태그에 action, method 속성 지정 --> <!-- django에서 제공하는 템플릿 태그. csrf 공격 방지 -->
+            <input type="text" placeholder="이름" name="name"> <!-- name 변수명은 todo테이블의 컬럼명과 동일해야 -->
+            <input type="text" placeholder="내용" name="todo">
+            <button type="submit">등록</button> <!-- 클릭 시 서버로 전송하기 위해 submit 타입 지정 -->
+        </form>
+
+    </div>
+    ```
+
+    1. `todo_list.html`
+
+    ``` html
+    <div id='app'>
+
+        <h1>my to do</h1>
+        <strong>할 일 관리</strong>
+
+        <ul>
+            {% for todo in object_list %} <!-- v-for 대신 django의 템플릿 태그로 변경. ListView에서는 object_list 라는 컨택스트 변수를 넘겨준다. -->
+            <li>
+                <span>{{ todo.name }} :: {{ todo.todo }}</span> <!-- vue.js의 머스태시 문법을 django의 문법으로 변경 -->
+                <span><a href="{% url 'todo:delete' todo.id %}">&#x00D7</a></span> <!-- 삭제 버튼 클릭 시 동작. 클릭 시 delete url을 요청하고, todo.id를 파라미터로 설정 -->
+            </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+    ```
+
+    1. `todo_confirm_delete.html`
+
+    ``` html
+    <div id='app'>
+
+        <h1>Todo Delete</h1>
+        <p>정말로 삭제하시겠습니까? {{ object }} </p> <!-- 컨택스트 변수 object를 넘겨줌 -->
+        <br>
+
+        <form action="." method="post"> {% csrf_token %} 
+            <button type="submit">확인</button>
+        </form>
+
+    </div>
+    ```
+1. 저장하고, 조회하고, 삭제해보자.
+
+    http://127.0.0.1:8000/todo/create/
 
 (계속)
